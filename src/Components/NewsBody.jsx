@@ -15,7 +15,7 @@ export default function NewsBody(props) {
         <>
             <div className='row' style={{width : "100%", margin : "auto", marginTop : "20px"}}>
                 { props.newsCategory === "" ?
-                    newsData.map(
+                    Array.isArray(newsData) && newsData.map(
                         (val, i) => (
                             <NewsCard
                                 key = {i}
@@ -25,7 +25,7 @@ export default function NewsBody(props) {
                                 mode = {props.mode}
                             /> 
                         ))
-                    : filteredObjects.map(
+                    : Array.isArray(filteredObjects) && filteredObjects.map(
                         (val, i) => (
                             <NewsCard
                                 key = {i}
