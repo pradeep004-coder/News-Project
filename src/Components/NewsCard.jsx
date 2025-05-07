@@ -21,6 +21,7 @@ export default function NewsCard (props) {
                                 type="button"
                                 className={`btn btn-${props.mode === "Light" ? "dark" : "primary"}`}
                                 style={{ fontSize: "12px", color: "white", textDecoration: "none" }}
+                                onClick={evt => props.handleReadMore(evt, props.index)}
                             >
                                 Read More
                             </button>

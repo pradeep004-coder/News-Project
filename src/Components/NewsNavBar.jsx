@@ -35,7 +35,7 @@ export default function NewsNavbar(props) {
               }
             </ul>
             <button
-              className="btn btn-outline-success ms-lg-2"
+              className="btn btn-outline-success border border-success ms-lg-2 ms-md-0"
               onClick={props.onModeChange}
               type="button"
             >
