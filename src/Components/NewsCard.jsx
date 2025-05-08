@@ -1,31 +1,30 @@
 import React from 'react';
 
-export default function NewsCard (props) {
+export default function NewsCard ({mode, newsObj, newsCategory, handleReadMore, index}) {
     return(
         <>
-            <div className="col-lg-3 col-md-4 col-sm-6 col-12 mb-4">
-                <div className="card " style={{border : "1px solid", boxShadow : "8px 5px 5px"}}>
-                    <div className="bg-secondary d-flex justify-content-center align-items-center" style={{height : "100px"}}>
-                        <div className="text-white fw-bold" style={{transform : "rotate(-35deg)"}}>Image</div>
+            <div className="col-lg-4 col-md-4 col-sm-6 col-12 mt-2 mb-4">
+                <div id='newsCard' className="card" style={{ backgroundColor : (mode === "Light" ? "#fff" : "#666")}}>
+                    <div id='newsCardimgPlaceholder' className="h-50 bg-secondary d-flex justify-content-center align-items-center" style={{height : "100px"}}>
+                        <span className="text-white fw-bold" style={{}}>Image</span>
                     </div>
-                    <div className="card-body" style={{backgroundColor : (props.mode === "Light" ? "#fff" : "#666")}}>
-                        <div className={`card-title text-${props.mode === "Light" ? "dark" : "white"}`}>
-                            <h4 style={{display : "-webkit-box", WebkitLineClamp : 2, WebkitBoxOrient : "vertical", overflow : "hidden"}}>{props.newsHeadline}</h4>
+                    <div className="card-body">
+                        <div className={`card-title text-${mode === "Light" ? "dark" : "white"}`}>
+                            <h4 id='newsCardHeading'>{newsObj.headline}</h4>
                         </div>
-                        <div className={`card-text`} style={{color : props.mode === "Dark"?"#eee":"black", display : "-webkit-box", WebkitLineClamp : 3, WebkitBoxOrient : "vertical", overflow : "hidden"}}>{props.newsDetail}</div>
-                        <div className=" mt-2 d-flex justify-content-between">
-                            <div style={{ fontSize : "12px"}}>
-                                <small className='fst-italic text-truncate '>{props.newsCategory}</small>
+                        <div id='newsDescription' className={`card-text ${mode === 'Dark' ? 'text-light' : 'dark'}`}>{newsObj.details}</div>
+                        <div className=" mt-4 d-flex  justify-content-between">
+                            <div className='my-auto fs-5'>
+                                <small id='newsCardCategory' className='my-auto fst-italic text-truncate '>{newsCategory}</small>
                             </div>
                             <button
+                                id='readMoreButton'
+                                className={`btn btn-${mode === "Light" ? "dark" : "primary"} text-white fs-5`}
                                 type="button"
-                                className={`btn btn-${props.mode === "Light" ? "dark" : "primary"}`}
-                                style={{ fontSize: "12px", color: "white", textDecoration: "none" }}
-                                onClick={evt => props.handleReadMore(evt, props.index)}
+                                onClick={evt => handleReadMore(evt, index)}
                             >
                                 Read More
                             </button>
-
                         </div>
                     </div>
                 </div>

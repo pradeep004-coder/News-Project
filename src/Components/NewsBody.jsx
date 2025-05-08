@@ -2,15 +2,15 @@ import React, { useState } from 'react';
 import NewsCard from './NewsCard'
 import newsData from './newsData'
 import NewsDetail from './NewsDetail';
-export default function NewsBody(props) {
+export default function NewsBody({newsCategory, mode}) {
     const [readObj, setReadObj] = useState({});
-    const filteredObjects = newsData.filter(items => items.category.includes(props.newsCategory))
+    const filteredObjects = newsData.filter(items => items.category.includes(newsCategory))
     const modifiedCategory = (val)=>{
-            if ( val.category.indexOf(props.newsCategory)!== 0 ) {
-                return `${props.newsCategory}, ${val.category.filter(item => item !== props.newsCategory).join(", ")}`
+            if ( val.category.indexOf(newsCategory)!== 0 ) {
+                return `${newsCategory}, ${val.category.filter(item => item !== newsCategory).join(", ")}`
             }
             else {
-                return props.newsCategory
+                return newsCategory
             }
     }
     const handleReadMore = (evt,i) => {
@@ -23,17 +23,16 @@ export default function NewsBody(props) {
     
     return(
         <>
-            <div className='row' style={{width : "100%", margin : "auto", marginTop : "20px"}}>
-                { props.newsCategory === "" ?
+            <div id='newsBody' className='row' style={{width : "100%", margin : "auto", marginTop : "20px"}}>
+                { newsCategory === "" ?
                     Array.isArray(newsData) && newsData.map(
                         (val, i) => (
                             <NewsCard
                                 key = {i}
                                 index = {i}
-                                newsHeadline = {val.headline}
-                                newsDetail = {val.details}
+                                newsObj = {val}
                                 newsCategory = {val.category.join(", ")}
-                                mode = {props.mode}
+                                mode = {mode}
                                 handleReadMore = {handleReadMore}
                             /> 
                         ))
@@ -42,17 +41,16 @@ export default function NewsBody(props) {
                             <NewsCard
                                 key = {i}
                                 index = {newsData.indexOf(val)}
-                                newsHeadline = {val.headline}
-                                newsDetail = {val.details}
+                                newsObj = {val}
                                 newsCategory = {modifiedCategory(val)}
-                                mode = {props.mode}
+                                mode = {mode}
                                 handleReadMore = {handleReadMore}
                             /> 
                         )
                 )}
             </div>
             { // use readObj.length instead of showNewsDetail
-                Object.keys(readObj).length && <NewsDetail readObj={readObj} handleDismiss={handleDismiss} mode={props.mode}/>
+                Object.keys(readObj).length && <NewsDetail readObj={readObj} handleDismiss={handleDismiss} mode={mode}/>
             }
         </>
     )

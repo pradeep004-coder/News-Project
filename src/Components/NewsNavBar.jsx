@@ -1,14 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-export default function NewsNavbar(props) {
+export default function NewsNavbar({mode, onModeChange}) {
   const categories = ["general", "politics", "economics", "technology", "entertainment"];
 
   return (
     <div className="bg-light">
-      <nav className={`navbar navbar-expand-md ${props.mode === "Dark" ? "navbar-dark" : "navbar-light"}`} style={{ backgroundColor: props.mode === "Dark" ? "#666" : "#e4dfff" }}>
+      <nav className={`navbar navbar-expand-md ${mode === "Dark" ? "navbar-dark" : "navbar-light"}`} style={{ backgroundColor: mode === "Dark" ? "#666" : "#e4dfff" }}>
         <div className="container-fluid">
-          <Link className="navbar-brand" to="/" style={{ color: props.mode === "Light" ? "#000" : "#fff" }}>
+          <Link className="navbar-brand" to="/" style={{ color: mode === "Light" ? "#000" : "#fff" }}>
             NewsApp
           </Link>
           <button
@@ -27,7 +27,7 @@ export default function NewsNavbar(props) {
               {
                 categories.map((val, i) => (
                   <li className="nav-item" key={i}>
-                    <Link className="nav-link" to={val} style={{ color: props.mode === "Light" ? "#000" : "#ccc" }}>
+                    <Link className="nav-link" to={val} style={{ color: mode === "Light" ? "#000" : "#ccc" }}>
                       {val}
                     </Link>
                   </li>
@@ -36,10 +36,10 @@ export default function NewsNavbar(props) {
             </ul>
             <button
               className="btn btn-outline-success border border-success ms-lg-2 ms-md-0"
-              onClick={props.onModeChange}
+              onClick={onModeChange}
               type="button"
             >
-              Go {props.mode === "Dark" ? "Light" : "Dark"}
+              Go {mode === "Dark" ? "Light" : "Dark"}
             </button>
           </div>
         </div>
